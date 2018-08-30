@@ -35,7 +35,7 @@ class InputReader(object):
         return n % self.batch_size == 0
 
     def max_batches_produced(self, batches_generated):
-        return batches_generated >= self.n_batches
+        return (not self.n_batches == -1) and batches_generated >= self.n_batches
 
     def get_batches(self, input_dir):
         files = self.get_fnames(input_dir)
@@ -45,7 +45,6 @@ class InputReader(object):
         for full_path in full_paths:
             content, rating = self.read_file(full_path)
             batch.append((content, rating))
-            print len(batch)    
             #Check if batch limit reached.
             if self.is_batch_limit_reached(len(batch)):
                 yield batch
