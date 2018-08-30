@@ -48,12 +48,13 @@ class Textpreprocessor(object):
                      correct_spell=False,
                      stem=False):
         for batch in text_generator:
+            print batch
             yield map(self.auxillary_preprocess, batch)
             
 
 if __name__ == "__main__":
     from input_reader import InputReader
-    input_reader = InputReader(10)
+    input_reader = InputReader(1, 10)
     input_dir = "/home/rohittulu/Documents/aclImdb/train/pos/"
     text_generator = input_reader.get_batches(input_dir)
     text_processor = Textpreprocessor()
